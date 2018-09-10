@@ -12,14 +12,24 @@ import pandas as pd
 from sklearn.preprocessing import Imputer
 import matplotlib.pyplot as plt
 import seaborn as sns
+import scipy.stats as stats
 
 data_file = "m1_w2_ds1.csv"
-def getMeanStd(imputed_data):
-   columnMean = np.mean(imputed_data, axis=0)
-   rowMean = np.mean(imputed_data, axis=1)
-   columnStd = np.std(imputed_data, axis=0)
-   rowStd = np.std(imputed_data, axis=1)
-   return columnMean, rowMean, columnStd, rowStd
+def boxPlots(df, cols):
+   nc = 3 #number of boxplots each row
+   nr = len(cols) / nc #total number of columns
+   if len(cols) % nc != 0: nr += 1
+
+   fig = plt.figure()
+   idx = 1
+   for c in cols:
+      ax = fig.add_subplot(nr, nc, idx)
+      df.boxplot(column=[c,])
+      ax.set_title(c, fontsize=8)
+      ax.xaxis.label.set_size(8)
+      ax.yaxis.label.set_size(8)
+      idx += 1
+
 
 def main():
    #1. Read in the data set
@@ -65,8 +75,19 @@ def main():
    #cm = np.corrcoef(df[cols].values.T)
    #ax2 = sns.heatmap(cm, cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 5}, yticklabels=cols, xticklabels=cols)
    #ax2.get_figure().savefig("heatmap.png")
+
+   #9. Use boxplot to identify outliers
+   print("plotting boxplot for 0 to 9 columns to identify outliers")
+   boxPlots(df, df.columns[:9])
+   print("plotting boxplot for 10 to 18 columns to identify outliers")
+   boxPlots(df, df.columns[9:18])
+   print("plotting boxplot for 19 and remaining columns to identify outliers")
+   boxPlots(df, df.columns[18:])
+
+   #10. 
    
    #show image
+   plt.tight_layout()
    plt.show()
 
 if __name__ == '__main__':
