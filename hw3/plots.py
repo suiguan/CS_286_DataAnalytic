@@ -66,15 +66,16 @@ def main():
    sns.set(style='whitegrid',  context='notebook')
 
    #7. scatter plot for first ten (10) columns and rows of the data set 
-   #cols = df.columns[:10]
-   #p1 = sns.pairplot(df[cols])
-   #p1.savefig("pairplot.png")
+   cols = df.columns[:10]
+   p1 = sns.pairplot(df[cols])
+   p1.savefig("pairplot.png")
 
    #8. Heatmap for first ten (10) columns and rows of the data set 
-   #cols = df.columns[:10]
-   #cm = np.corrcoef(df[cols].values.T)
-   #ax2 = sns.heatmap(cm, cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 5}, yticklabels=cols, xticklabels=cols)
-   #ax2.get_figure().savefig("heatmap.png")
+   fig = plt.figure()
+   cols = df.columns[:10]
+   cm = np.corrcoef(df[cols].values.T)
+   ax2 = sns.heatmap(cm, cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 5}, yticklabels=cols, xticklabels=cols)
+   ax2.get_figure().savefig("heatmap.png")
 
    #9. Use boxplot to identify outliers
    print("plotting boxplot for 0 to 9 columns to identify outliers")
@@ -84,7 +85,21 @@ def main():
    print("plotting boxplot for 19 and remaining columns to identify outliers")
    boxPlots(df, df.columns[18:])
 
-   #10. 
+   #10. use DataFrame.quantile() member function to get the quantiles range
+   qdf = df.quantile([0, 0.25, 0.5, 0.75, 1.0])
+   for c in qdf.columns:
+      qs = qdf[c].values
+      _min = qs[0]
+      q1 = qs[1]
+      q2 = qs[2]
+      q3 = qs[3]
+      _max = qs[4]
+      #use IQR to determine if there is any outliers
+      IQR = q3 - q1
+      begin = q1 - (1.5 * IQR)
+      end = q3 + (1.5 * IQR)
+      if _min < begin or _max > end:
+         print("column %s probably has outliers !! check them more closely!!" % c)
    
    #show image
    plt.tight_layout()
