@@ -26,9 +26,9 @@ def main():
    print("Step A: finished reading file %s\n" % data_file) 
 
    #b. Replacing all occurrences of the string '1 5 255' with 0 
-   print ("Step B: Replacing '1 5 255' in data set with 0")
+   print ("Step B: Replacing '1 5 255' in data set with 0", df)
    df.replace('1 5 255', 0, inplace = True) 
-   print ("Step B: Completed replacing '1 5 255'\n")
+   print ("Step B: Completed replacing '1 5 255'\n", df)
 
    #c. convert ordinal values with numeric values 
    #"ordinalMap" is a dictionary, where 
