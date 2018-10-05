@@ -15,14 +15,14 @@ zValue = -1.4670
 HYPORTEST = True
 CI = True
 if HYPORTEST:
-   n = 12
-   xBar = 217
-   populationStd = 46
-   populationMeanTest = 211
-   hytestAlpha = 0.05
+   n = 10
+   xBar = 84
+   populationStd = 9.1
+   populationMeanTest = 74.4
+   hytestAlpha = 0.01
    print("n = %s, xBar = %s, populationStd = %s, populationMeanTest = %s" %\
          (n, xBar, populationStd, populationMeanTest))
-   print("testing u = %s, alpha = %s" % (populationMeanTest, hytestAlpha))
+   print("testing H0: u = %s, alpha = %s" % (populationMeanTest, hytestAlpha))
    zValue = (xBar - populationMeanTest) / (populationStd / math.sqrt(n))
 
 probLeft = stats.norm.cdf(zValue)
@@ -35,7 +35,7 @@ if HYPORTEST:
 
 
    if CI:
-      CITwoSideConfident = 0.95
+      CITwoSideConfident = 1 - hytestAlpha
       probRight = (1 - CITwoSideConfident) / 2
       z = stats.norm.ppf(1-probRight)
       CI_0 = (-z * populationStd / math.sqrt(n)) + xBar
