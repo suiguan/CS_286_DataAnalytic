@@ -3,11 +3,11 @@ import math
 
 useT = False
 
-alpha = 0.05
-beta = 0.1
+alpha = 0.05 #Two-sided
+beta = 0.10
 ua = 3500
 ub = 3800 #high side
-std = 430
+std = 430 
 
 za = stats.norm.ppf(1-(alpha/2))
 zb = stats.norm.ppf(1-beta)
