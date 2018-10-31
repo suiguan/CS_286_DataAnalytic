@@ -2,12 +2,12 @@ from scipy import stats
 import math
 
 useT = True #True #set it to True if population std is unknown
-n = 86 
-xBar = 143 
-std = 24.4 
-hytestAlpha = 0.10
+n = 144 
+xBar = 104.736111 
+std = 15.604368 
+hytestAlpha = 0.05
 testRelation = "=" 
-populationMeanTest = 136 
+populationMeanTest = 100 
 
 df = n - 1
 print("n = %s, xBar = %s, std = %s, populationMeanTest = %s, df = %s" %\
