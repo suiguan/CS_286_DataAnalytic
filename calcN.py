@@ -4,7 +4,7 @@ import math
 useT = False
 
 alpha = 0.05 #Two-sided
-beta = 0.10
+beta = 0.1
 ua = 3500
 ub = 3800 #high side
 std = 430 
