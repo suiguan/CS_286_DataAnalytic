@@ -4,7 +4,7 @@ NAME: suikun_guan_chk_data_normality.py
 This module is for Programming Assignment 3 to quantify the degree of difference
 between the given data distribution and normal distribution. 
 
-@author: Sui Kun Guan 
+This module is based on the "cs286_chk_norm_dist.py" by Professor Leonard Wesley @FALL 2018 CS 286 SecII under Week10/code
 """
 
 # Imports
@@ -23,7 +23,7 @@ from scipy.stats.mstats import normaltest
 from textwrap import wrap
 
 
-__NUM_ITERATIONS__ = 3
+__NUM_ITERATIONS__ = 1 
 __MATPLOTLIP_TITLE_WIDTH__ = 60
 __PLOT_SIZE_X__ = 8
 __PLOT_SIZE_Y__ = 6
@@ -37,8 +37,8 @@ def comp_vec_sum(nums):
 
 # the main module method to compare the distribution
 # reference: cs286_chk_norm_dist.py by Professor Leonard Wesley @FALL 2018 CS 286 SecII under Week10/code
-# most the codes are same with the reference, except I do not included some of the debug prints, and
-# read file based on the arguments instead of the "example_dataset.csv"
+# most of the codes are same from the reference, except I do not included some of the debug prints, and
+# read file is based on the arguments instead of the fixed filename "example_dataset.csv"
 def compare(dataset):
    df = pd.read_csv(dataset)
    df_num_rows = len(df.index)
@@ -70,7 +70,7 @@ def compare(dataset):
      X_test = dfsvc_test[__PREDICTOR_VARIABLES__] 
      
      # Scale the data set from -1 to 1
-     print ("   Scaling training data set between [-1., 1.]" )
+     print ("\n\n   Scaling training data set between [-1., 1.]" )
      scaler = MinMaxScaler(feature_range = (-1., 1.))
      X_scaled = scaler.fit_transform(X)
      X_test_scaled = scaler.fit_transform(X_test)
@@ -137,7 +137,6 @@ def compare(dataset):
              (X_test_scaled_hr_match, Decimal(X_test_scaled_hr_match_pvalue)))
      print("Completed deterining the degree of fit of training and test data to normal distribution")
      print("  for iteration: ", iter_ctr)
-     print()
      
      # Display histograms for training and test data
      # See:  http://danielhnyk.cz/fitting-distribution-histogram-using-python/ 
@@ -218,12 +217,12 @@ def compare(dataset):
      # Increment iteration count
      iter_ctr = 1 + iter_ctr 
      
-   if iter_ctr <= __NUM_ITERATIONS__:
-      print()
-      print("Starting iteration: ", iter_ctr) 
-   else:
-      print()        
-      print(">>>>> DONE <<<<<")
+     if iter_ctr <= __NUM_ITERATIONS__:
+        print("")
+        print("Starting iteration: ", iter_ctr) 
+     else:
+        print()        
+        print(">>>>> DONE <<<<<")
 
 
 
