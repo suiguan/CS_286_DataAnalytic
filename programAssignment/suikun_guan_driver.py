@@ -32,5 +32,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_
 classifier = OneVsRestClassifier(svm.SVC(kernel='linear', probability=True, random_state=random_state))
 y_score = classifier.fit(X_train, y_train).decision_function(X_test)
 
-#display the ROC plot
+#display the ROC plot for class 2 only
+c=2
+print("displaying ROC plot for class %d" % c)
+roc_plot.displayROC(y_test, y_score, n_classes, c)
+
+#display the ROC plot for class 1 only
+c=1
+print("displaying ROC plot for class %d" % c)
+roc_plot.displayROC(y_test, y_score, n_classes, c)
+
+#then, display the ROC plot for all classes
+print("displaying ROC plot for all classes") 
 roc_plot.displayROC(y_test, y_score, n_classes)
