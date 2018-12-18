@@ -57,8 +57,8 @@ def compare(dataset):
    # will be determined. Must have at least two samples
    if __TRAINING_TEST_SPLIT__ != None: num_samples = max(2, int(df_num_rows * __TRAINING_TEST_SPLIT__)) 
 
-   print("Starting to compute the degree of match between ")
-   print(" a training and test data sets over ", __NUM_ITERATIONS__, " iteration(s)")
+   #print("Starting to compute the degree of match between ")
+   #print(" a training and test data sets over ", __NUM_ITERATIONS__, " iteration(s)")
    iter_ctr = 1
    fig_ctr = 1
    for _ in itertools.repeat(None, __NUM_ITERATIONS__): 
@@ -81,7 +81,7 @@ def compare(dataset):
         X_test = dfsvc_test[__PREDICTOR_VARIABLES__] 
      
      # Scale the data set from -1 to 1
-     print ("\n\n   Scaling training data set between [-1., 1.]" )
+     print ("\n\n   Scaling data set between [-1., 1.]" )
      scaler = MinMaxScaler(feature_range = (-1., 1.))
      X_scaled = scaler.fit_transform(X)
      if __TRAINING_TEST_SPLIT__ != None:
@@ -90,7 +90,7 @@ def compare(dataset):
 
      # Generate histograms for both classes in both the training and test data sets
      # First compute vector sum of samples for training set
-     print("   Deterining the degree of fit between training and test data to a normal distribution.")
+     #print("   Deterining the degree of fit between training and test data to a normal distribution.")
      col_names = X.columns
      df_X_scaled = pd.DataFrame(X_scaled, columns = col_names)
      if __TRAINING_TEST_SPLIT__ != None:
@@ -120,7 +120,7 @@ def compare(dataset):
      X_scaled_hr = normaltest(X_scaled_hist_data)
      X_scaled_hr_match = X_scaled_hr[0]
      X_scaled_hr_match_pvalue = X_scaled_hr[1]
-     print("   Training data set match to normal dist: %.1f  with p-value: %.4E" % \
+     print("   Data set match to normal dist: %.1f  with p-value: %.4E" % \
              (X_scaled_hr_match, Decimal(X_scaled_hr_match_pvalue)))
 
      if __TRAINING_TEST_SPLIT__ != None:
@@ -130,12 +130,12 @@ def compare(dataset):
         print("   Test data set match to normal dist:     %.1f  with p-value: %.4E" % \
                 (X_test_scaled_hr_match, Decimal(X_test_scaled_hr_match_pvalue)))
 
-     print("Completed deterining the degree of fit of training and test data to normal distribution")
-     print("  for iteration: ", iter_ctr)
+     #print("Completed deterining the degree of fit of training and test data to normal distribution")
+     #print("  for iteration: ", iter_ctr)
      
      # Display histograms for training and test data
      # See:  http://danielhnyk.cz/fitting-distribution-histogram-using-python/ 
-     print("Displaying histograms for training and test data sets.")
+     print("\n\nDisplaying histograms for data sets.")
      
      # Display training data first
      fig = plt.figure(fig_ctr, figsize = (__PLOT_SIZE_X__, __PLOT_SIZE_Y__)) 
@@ -209,18 +209,18 @@ def compare(dataset):
         plt.show() 
 
 
-     print("Completed displaying histograms for training and test data sets")
-     print("  for iteration: ", iter_ctr)
+     #print("Completed displaying histograms for training and test data sets")
+     #print("  for iteration: ", iter_ctr)
      
      # Increment iteration count
      iter_ctr = 1 + iter_ctr 
      
      if iter_ctr <= __NUM_ITERATIONS__:
         print("")
-        print("Starting iteration: ", iter_ctr) 
+        #print("Starting iteration: ", iter_ctr) 
      else:
         print()        
-        print(">>>>> DONE <<<<<")
+        #print(">>>>> DONE <<<<<")
 
 
 
